@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "start": "pnpm --filter web dev",
+        "build": "pnpm --filter web build"
+    }
+}
