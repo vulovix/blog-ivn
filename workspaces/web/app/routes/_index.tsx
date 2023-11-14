@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import Articles from "~/features/Articles";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,10 +9,10 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function loader(args: LoaderFunctionArgs) {
+  return null;
+}
+
 export default function Index() {
-  return (
-    <div>
-      <h1>Oaza</h1>
-    </div>
-  );
+  return <Articles />;
 }

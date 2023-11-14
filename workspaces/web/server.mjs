@@ -17,6 +17,15 @@ let vite =
 
 const app = express();
 
+app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "https://oaza.dev",
+    changeOrigin: true,
+    // pathRewrite: { "^/api": "" },
+  })
+);
+
 // handle asset requests
 
 if (vite) {

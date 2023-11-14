@@ -1,0 +1,57 @@
+.oasis-ticker{
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    padding: 0.25rem 0;
+    &.empty{
+        .ticker{
+            min-width: 100%;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .ticker{
+        white-space: nowrap;
+        // background-color: var(--background);
+    }
+    .ticker-item{
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        // padding: 0.25rem 0.5rem;
+        align-items: center;
+        font-weight: 500;
+        border-right: 1px solid var(--primary);
+        color: var(--text);
+        // border-right: 1px solid var(--primary);
+        // color: var(--text);
+        &:hover{
+            background-color: var(--primary);
+            // color: var(--primary-dark);
+            // background-color: var(--primary);
+        }
+        .ticker-flex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+        }
+        .img{
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            width: 1rem;
+            min-height: 1rem;
+            overflow: hidden;
+            display: inline-block;
+            box-sizing: content-box;
+            background-size: cover;
+            background-position: center;
+        }
+        span{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }   
+}
