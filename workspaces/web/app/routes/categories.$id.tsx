@@ -1,10 +1,9 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Loader } from "ui";
 import MainArticle from "~/components/Articles/Main";
 import makeGetRequest from "~/utils/request";
-import "~/style/categorized-articles.scss";
 import { Article } from "~/types/global";
+import "~/style/categories.scss";
 
 export async function loader(args: LoaderFunctionArgs) {
   const response = await makeGetRequest(
@@ -17,20 +16,10 @@ export async function loader(args: LoaderFunctionArgs) {
 export default function ArticleDetails(): JSX.Element {
   const articles: Array<Article> = useLoaderData<typeof loader>();
 
-  if (!articles?.length) {
-    return (
-      <div className="articles">
-        <div className="area-center center">
-          <Loader />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="categorized-articles">
+    <div className="categories">
       {articles.map((article: Article) => (
-        <MainArticle {...article} />
+        <MainArticle key={article._id} {...article} />
       ))}
     </div>
   );

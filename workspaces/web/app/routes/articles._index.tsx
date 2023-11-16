@@ -1,15 +1,9 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
-export async function loader(args: LoaderFunctionArgs) {
-  return null;
+export async function loader() {
+  return redirect("/");
 }
 
-interface ArticlesProps {}
-
-export default function Articles(props: ArticlesProps): JSX.Element {
-  return (
-    <div>
-      <h1>/articles route</h1>
-    </div>
-  );
+export default function Articles(): JSX.Element {
+  return <></>;
 }

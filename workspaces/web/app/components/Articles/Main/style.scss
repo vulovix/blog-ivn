@@ -8,15 +8,12 @@
         font-size: 2rem;
     }
     .img{
-        min-height: 250px;
+        min-height: 250px!important;
     }
-
     .paragraph{
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 5;
         -webkit-box-orient: vertical;
-    }
-    @media screen and (max-width: 640px) {
     }
 }

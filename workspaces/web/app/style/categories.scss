@@ -1,4 +1,4 @@
-.categorized-articles {
+.categories {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     max-width: 940px;
@@ -22,8 +22,6 @@
 
     .img {
         height: 200px;
-        // background-size: cover;
-        // background-position: center;
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
@@ -33,7 +31,7 @@
 
 
 @media screen and (max-width: 640px) {
-    .categorized-articles {
+    .articles-category {
         gap: 0.5rem;
         margin: 0 0.5rem;
         font-size: 0.75rem;
