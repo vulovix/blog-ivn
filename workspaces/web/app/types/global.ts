@@ -15,3 +15,13 @@ export interface Category {
   name: string;
   // createdAt: number;
 }
+
+export enum ThemeEnum {
+  Light = "light",
+  Dark = "dark",
+}
+
+export enum InvertEnum {
+  No = "No",
+  Yes = "Yes",
+}

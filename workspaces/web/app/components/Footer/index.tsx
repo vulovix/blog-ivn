@@ -5,9 +5,13 @@ import MdInvertColorsOff from "/assets/icons/MdInvertColorsOff.svg";
 import MdInvertColors from "/assets/icons/MdInvertColors.svg";
 import FaCloudMoon from "/assets/icons/FaCloudMoon.svg";
 import BsFillSunFill from "/assets/icons/BsFillSunFill.svg";
-// import { useState } from "react";
+import { PropsWithChildren } from "react";
 
-export default function Footer(): JSX.Element {
+export default function Footer(props: PropsWithChildren<unknown>): JSX.Element {
+  // const isExperimentalInvertEnabled = () =>
+  //   window.Storage.experimentalInvertEnabled;
+
+  // const isLightTheme = () => window.Storage.getTheme() === "light";
   // const { opositeTheme } = useThemeDetector();
   // const experimentalInvertEnabled = useSelector(selectExperimentalInvert);
 
@@ -31,19 +35,26 @@ export default function Footer(): JSX.Element {
           &nbsp;{new Date().getFullYear()} Oaza
         </div>
         <div className="align-center">
-          <Button>
-            {/* <MdInvertColors /> */}
-            <img src={MdInvertColors} alt="Invert on" />
-          </Button>
-          <Button>
-            <img src={MdInvertColorsOff} alt="Invert off" />
-          </Button>
-          <Button>
-            <img src={BsFillSunFill} alt="Light" />
-          </Button>
-          <Button>
-            <img src={FaCloudMoon} alt="Dark" />
-          </Button>
+          {props.children}
+          {/* {isExperimentalInvertEnabled() ? (
+            <Button>
+              <img src={MdInvertColors} alt="Invert on" />
+            </Button>
+          ) : (
+            <Button>
+              <img src={MdInvertColorsOff} alt="Invert off" />
+            </Button>
+          )}
+          {isLightTheme() ? (
+            <Button>
+              <img src={FaCloudMoon} alt="Dark" />
+            </Button>
+          ) : (
+            <Button>
+              <img src={BsFillSunFill} alt="Light" />
+            </Button>
+          )} */}
+
           {/* {isLoggedIn ? (
             <></>
           ) : (

@@ -1,11 +1,40 @@
-import { useRouteLoaderData } from "@remix-run/react";
-import type { MetaFunction } from "@remix-run/node";
-import { LoaderFunctionArgs } from "@remix-run/node";
+import {
+  useFetcher,
+  useLoaderData,
+  useRouteLoaderData,
+} from "@remix-run/react";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
 import MainArticle from "~/components/Articles/Main";
 import GridArticle from "~/components/Articles/Grid";
-import { Article } from "~/types/global";
+import { Article, InvertEnum, ThemeEnum } from "~/types/global";
 import "~/style/articles.scss";
 import { Loader } from "ui";
+import preferences from "~/utils/storage";
+
+export async function action({ request }: ActionFunctionArgs) {
+  const cookieHeader = request.headers.get("Cookie");
+  const cookie = (await preferences.parse(cookieHeader)) || {};
+  const formData = await request.formData();
+
+  const theme = formData.get("theme");
+  cookie.theme = theme;
+
+  const experimentalInvert = formData.get("experimentalInvert");
+  cookie.experimentalInvert = experimentalInvert;
+
+  return json(
+    {
+      theme,
+      experimentalInvert,
+    },
+    {
+      headers: {
+        "Set-Cookie": await preferences.serialize(cookie),
+      },
+    }
+  );
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -19,39 +48,11 @@ export async function loader(args: LoaderFunctionArgs) {
 }
 
 export default function Index() {
-  const articles = useRouteLoaderData<Array<Article>>("root");
-  if (!articles?.length) {
-    return (
-      <div className="articles">
-        <div className="area-center center">
-          <Loader />
-        </div>
-      </div>
-    );
-  }
+  const { articles } = useRouteLoaderData<any>("root");
 
   const main = articles.slice(0, 3);
   const left = articles.slice(3, 7);
   const right = articles.slice(7, 10);
-
-  // const [main, left, right] = useMemo(() => {
-  //   const m = [];
-  //   const l = [];
-  //   const r = [];
-  //   if (!articles.length) {
-  //     return [m, l, r];
-  //   }
-  //   const size = 4;
-  //   let i = 0;
-  //   do {
-  //     m.push(articles[i]);
-  //     l.push(articles[i + size]);
-  //     r.push(articles[i + size * i]);
-  //     i++;
-  //   } while (m.length % size);
-
-  //   return [m, l, r];
-  // }, [articles]);
 
   return (
     <div className="articles">

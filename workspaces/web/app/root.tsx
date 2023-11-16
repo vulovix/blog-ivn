@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useFetcher,
   useLoaderData,
 } from "@remix-run/react";
 import { LoaderFunctionArgs } from "@remix-run/node";
@@ -12,16 +13,22 @@ import { Suspense, lazy } from "react";
 
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import preferences from "~/utils/storage";
 import makeGetRequest from "~/utils/request";
-import { ThemeEnum } from "./components/Articles/Image";
 import { Loader } from "ui";
+import { ThemeEnum } from "./types/global";
 
-const CategoriesFilter = lazy(() => import("~/features/CategoriesFilter"));
 const Ticker = lazy(() => import("~/features/Ticker"));
+const CategoriesFilter = lazy(() => import("~/features/CategoriesFilter"));
 
 export async function loader(args: LoaderFunctionArgs) {
+  const cookieHeader = args.request.headers.get("Cookie");
+  const cookie = (await preferences.parse(cookieHeader)) || {};
   const response = await makeGetRequest(args, "/api/articles/public");
-  return response;
+  return {
+    articles: response,
+    theme: cookie.theme === ThemeEnum.Light ? ThemeEnum.Dark : ThemeEnum.Light,
+  };
 }
 
 const Loading = () => (
@@ -38,11 +45,11 @@ const Loading = () => (
 );
 
 export default function Root() {
-  const data = useLoaderData<typeof loader>();
+  let { articles, theme } = useLoaderData<typeof loader>();
 
   return (
     /** @ts-ignore */
-    <html lang="en" theme={ThemeEnum.Dark}>
+    <html lang="en" theme={theme}>
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" type="image/png" href="/favicon.png" />
@@ -54,11 +61,14 @@ export default function Root() {
       <body>
         <Header />
         <Suspense fallback={<Loading />}>
-          <Ticker articles={data} />
+          <Ticker articles={articles} />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <CategoriesFilter />
         </Suspense>
+        {/* <Suspense fallback={<Loading />}>
+          <StorageProvider />
+        </Suspense> */}
         <Outlet />
         <Footer />
         <ScrollRestoration />
