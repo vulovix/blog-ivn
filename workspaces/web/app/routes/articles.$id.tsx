@@ -33,3 +33,5 @@ export default function ArticleDetails(): JSX.Element {
     </div>
   );
 }
+
+export const shouldRevalidate = () => false;

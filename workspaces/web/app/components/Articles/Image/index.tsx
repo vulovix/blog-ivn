@@ -8,11 +8,12 @@ export enum ThemeEnum {
   Dark = "dark",
   Light = "light",
 }
+import { useLoaderData, useRouteLoaderData } from "@remix-run/react";
 import { useMemo } from "react";
 
 export default function Image({ src }: { src: string }): JSX.Element {
-  const themeKey = ThemeEnum.Light; // useSelector(selectThemeKey);
-  const experimentalInvertEnabled = false; // useSelector(selectExperimentalInvert);
+  const { theme, experimentalInvert } = useRouteLoaderData("root");
+  const experimentalInvertEnabled = experimentalInvert == 1;
 
   const filter = useMemo(() => {
     if (!experimentalInvertEnabled) {
@@ -22,11 +23,11 @@ export default function Image({ src }: { src: string }): JSX.Element {
     if (!isPng) {
       return undefined;
     }
-    return themeKey === ThemeEnum.Dark ? "invert(1)" : "invert(0)";
-  }, [themeKey, experimentalInvertEnabled]);
+    return theme === ThemeEnum.Dark ? "invert(1)" : "invert(0)";
+  }, [theme, experimentalInvertEnabled]);
 
   const backgroundColor = useMemo(() => {
-    switch (themeKey) {
+    switch (theme) {
       case ThemeEnum.Dark: {
         if (experimentalInvertEnabled) {
           return "var(--background-invert)";
@@ -39,7 +40,7 @@ export default function Image({ src }: { src: string }): JSX.Element {
       default:
         return "var(--background)";
     }
-  }, [themeKey, experimentalInvertEnabled]);
+  }, [theme, experimentalInvertEnabled]);
 
   return (
     <div
