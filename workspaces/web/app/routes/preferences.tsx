@@ -8,14 +8,24 @@ export async function loader(args: LoaderFunctionArgs) {
 
 export async function action({ request }: ActionFunctionArgs) {
   const cookieHeader = request.headers.get("Cookie");
-  const cookie = (await preferences.parse(cookieHeader)) || {};
+  let cookie = await preferences.parse(cookieHeader);
   const formData = await request.formData();
 
-  Object.keys(cookie).forEach((key) => {
-    if (formData.has(key)) {
-      cookie[key] = formData.get(key);
-    }
-  });
+  if (!cookie) {
+    cookie = {};
+  }
+
+  if (formData.has("theme")) {
+    cookie["theme"] = formData.get("theme");
+  }
+
+  if (formData.has("experimentalInvert")) {
+    cookie["experimentalInvert"] = formData.get("experimentalInvert");
+  }
+
+  if (!Object.keys(cookie).length) {
+    return json({});
+  }
 
   return json(cookie, {
     headers: {
