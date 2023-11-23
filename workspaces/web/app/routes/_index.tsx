@@ -50,5 +50,3 @@ export default function Index() {
     </div>
   );
 }
-
-export const shouldRevalidate = () => false;

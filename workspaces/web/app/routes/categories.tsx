@@ -4,6 +4,4 @@ export async function loader() {
   return null;
 }
 
-export const shouldRevalidate = () => false;
-
 export default Outlet;

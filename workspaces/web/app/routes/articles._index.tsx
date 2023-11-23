@@ -4,8 +4,6 @@ export async function loader() {
   return redirect("/");
 }
 
-export const shouldRevalidate = () => false;
-
 export default function Articles(): JSX.Element {
   return <></>;
 }

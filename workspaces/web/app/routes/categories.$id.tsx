@@ -5,8 +5,6 @@ import makeGetRequest from "~/utils/request";
 import { Article } from "~/types/global";
 import "~/style/categories.scss";
 
-export const shouldRevalidate = () => false;
-
 export async function loader(args: LoaderFunctionArgs) {
   const response = await makeGetRequest(
     args,
