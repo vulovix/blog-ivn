@@ -17,7 +17,7 @@ export async function loader(args: LoaderFunctionArgs) {
 
 export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
   return [
-    { title: `${data.title} | Oaza` },
+    { title: `${data.title} | Articles | Oaza` },
     {
       name: "keywords",
       content:
