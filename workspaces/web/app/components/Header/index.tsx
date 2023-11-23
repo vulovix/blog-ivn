@@ -6,7 +6,7 @@ export default function Header(): JSX.Element {
     <header className="header">
       <div className="header-content">
         <Link to="/" className="logo">
-          <img className="invert" src="/favicon64x64.png" alt="Logo" />
+          <img className="invert" src="/public/favicon64x64.png" alt="Logo" />
           <h1>Oaza</h1>
         </Link>
       </div>

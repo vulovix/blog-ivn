@@ -1,9 +1,9 @@
 import { Button } from "ui";
-import PiCopyrightBold from "/assets/icons/PiCopyrightBold.svg";
-import MdInvertColorsOff from "/assets/icons/MdInvertColorsOff.svg";
-import MdInvertColors from "/assets/icons/MdInvertColors.svg";
-import FaCloudMoon from "/assets/icons/FaCloudMoon.svg";
-import BsFillSunFill from "/assets/icons/BsFillSunFill.svg";
+import PiCopyrightBold from "/public/assets/icons/PiCopyrightBold.svg";
+import MdInvertColorsOff from "/public/assets/icons/MdInvertColorsOff.svg";
+import MdInvertColors from "/public/assets/icons/MdInvertColors.svg";
+import FaCloudMoon from "/public/assets/icons/FaCloudMoon.svg";
+import BsFillSunFill from "/public/assets/icons/BsFillSunFill.svg";
 import { PropsWithChildren, useEffect } from "react";
 import { useFetcher, useRouteLoaderData } from "@remix-run/react";
 import "./style.scss";

@@ -4,4 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [remix(), tsconfigPaths()],
+  build: {
+    ssrEmitAssets: true, // i think this doesn't do anything at all
+  },
 });

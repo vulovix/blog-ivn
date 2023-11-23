@@ -36,11 +36,11 @@ export default function Root() {
     <html lang="en" theme={theme} invert={experimentalInvert}>
       <head>
         <meta charSet="utf-8" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/png" href="/public/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/public/style.css" />
       </head>
       <body>
         <Header />
