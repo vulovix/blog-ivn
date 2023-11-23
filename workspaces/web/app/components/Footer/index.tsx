@@ -27,7 +27,7 @@ export default function Footer(props: PropsWithChildren<unknown>): JSX.Element {
     <footer className="footer">
       <div className="footer-inner">
         <div className="align-center">
-          <img src={PiCopyrightBold} alt="Copyright" />
+          <img style={style} src={PiCopyrightBold} alt="Copyright" />
           &nbsp;{new Date().getFullYear()} Oaza
         </div>
         <fetcher.Form
