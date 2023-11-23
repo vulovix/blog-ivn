@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { Article as ArticleType } from "~/types/global";
 import makeGetRequest from "~/utils/request";
@@ -14,6 +14,30 @@ export async function loader(args: LoaderFunctionArgs) {
   );
   return response;
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+  return [
+    { title: `${data.title} | Oaza` },
+    {
+      name: "keywords",
+      content:
+        "Oaza, Oasis, Programming, Software Development, Blog, HTML, CSS, React, JavaScript, TypeScript, Redux, Saga, nginx",
+    },
+    { name: "title", content: data.title },
+    { property: "og:title", content: data.title },
+    { property: "twitter:title", content: data.title },
+    { name: "description", content: data.subtitle },
+    { property: "og:description", content: data.subtitle },
+    { property: "twitter:description", content: data.subtitle },
+    { property: "og:image", content: data.image },
+    { property: "twitter:image", content: data.image },
+    { property: "og:image:alt", content: data.image },
+    { property: "twitter:image:alt", content: data.image },
+    { property: "og:url", content: `https://oaza.dev/articles/${data.slug}` },
+    { property: "og:type", content: "article" },
+    { property: "twitter:card", content: "summary_large_image" },
+  ];
+};
 
 export default function ArticleDetails(): JSX.Element {
   const article: ArticleType = useLoaderData<typeof loader>();
