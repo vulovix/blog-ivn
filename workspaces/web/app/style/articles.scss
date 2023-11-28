@@ -71,6 +71,63 @@
     display: grid;
     gap: 0.5rem;
 
+    position: relative;
+
+    // $numquotes: 3;
+    // $fadingin: 1s;
+    // $showing: 5s;
+    // $fadingout: 1s;
+    // $duration: ( fadingin + showing + fadingout ) * numquotes; = 21
+
+    // https: //stackoverflow.com/questions/65849610/display-divs-one-by-one-with-css-animation
+    
+    @keyframes fadeinout {
+      0% {
+        opacity: 0;
+      }
+  
+      4.76% {
+        /* = fadingin / duration * 100% */
+        opacity: 1;
+        z-index: 1;
+      }
+  
+      28.57% {
+        /* = (fadingin + showing) / duration * 100% */
+        opacity: 1;
+      }
+  
+      33.33% {
+        /* = (fadingin + showing + fadingout) / duration * 100% */
+        opacity: 0;
+      }
+  
+      100% {
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+  
+    & > .main-article {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      animation-name: fadeinout;
+      animation-duration: 21s;
+      /* = (fadingin + showing + fadingout) * numquotes */
+      animation-iteration-count: infinite;
+    }
+
+    & > .main-article:nth-child(1) { /* delay = (i-1) / numquotes * duration; */
+      animation-delay: 0s;
+    }
+    & > .main-article:nth-child(2) {
+      animation-delay: 7s;
+    }
+    & > .main-article:nth-child(3) {
+      animation-delay: 14s;
+    }
+    
     & > .main-article:not(:last-child) {
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
