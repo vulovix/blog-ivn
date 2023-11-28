@@ -64,8 +64,8 @@ export default function Index() {
   const { articles } = useLoaderData<any>();
 
   const main = articles.slice(0, 3);
-  const left = articles.slice(3, 7);
-  const right = articles.slice(7, 10);
+  const left = articles.slice(3, 9);
+  const right = articles.slice(9, 15);
 
   return (
     <div className="articles">
@@ -82,8 +82,7 @@ export default function Index() {
       </div>
 
       <div className="area-right">
-        <div className="ad"></div>
-
+        {/* <div className="ad"></div> */}
         {right.map((article) => (
           <GridArticle key={article._id} {...article} />
         ))}

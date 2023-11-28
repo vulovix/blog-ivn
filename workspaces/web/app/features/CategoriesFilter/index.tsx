@@ -20,9 +20,9 @@ function CategoriesFilter(): JSX.Element {
   }, []);
   return (
     <div className="categories-filter">
-      <button>
+      {/* <button>
         <svg viewBox="0 0 16 16" height="1em" width="0"></svg>
-      </button>
+      </button> */}
       <ul>
         {categories?.map((category: Category): JSX.Element => {
           const isActive = id === category.slug;
