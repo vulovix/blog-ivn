@@ -1,0 +1,19 @@
+.main-article {
+    display: grid;
+    gap: 0.5rem;
+    align-content: baseline;
+    text-decoration: none;
+    color: inherit;
+    h1{
+        font-size: 2rem;
+    }
+    .img{
+        min-height: 250px!important;
+    }
+    .paragraph{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+}

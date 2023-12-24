@@ -1,0 +1,50 @@
+.article {
+  display: grid;
+  max-width: 940px;
+  margin: 0 auto;
+
+  gap: 0.5rem;
+  align-content: baseline;
+
+  .title {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 640px) {
+    & {
+      padding: 0 0.5rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .editor.readonly p,
+  .paragraph,
+  .editor-list-ol,
+  .editor-list-ul {
+    font-size: 0.85rem;
+    text-align: justify;
+    line-height: 1.35rem;
+  }
+
+  .secondary {
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+
+  .img {
+    min-height: 300px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

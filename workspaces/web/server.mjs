@@ -5,8 +5,10 @@ import {
 import { createRequestHandler } from "@remix-run/express";
 import { installGlobals } from "@remix-run/node";
 import { createProxyMiddleware } from "http-proxy-middleware";
-
+import path from "path";
 import express from "express";
+import { URL } from "url";
+const __dirname = new URL(".", import.meta.url).pathname;
 
 installGlobals();
 
@@ -17,6 +19,15 @@ let vite =
 
 const app = express();
 
+app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "https://oaza.dev",
+    changeOrigin: true,
+    // pathRewrite: { "^/api": "" },
+  })
+);
+
 // handle asset requests
 
 if (vite) {
@@ -24,10 +35,16 @@ if (vite) {
 } else {
   app.use(
     "/build",
-    express.static("public/build", { immutable: true, maxAge: "1y" })
+    express.static(path.join(__dirname, "public/build"), {
+      immutable: true,
+      maxAge: "1y",
+    })
   );
 }
-app.use(express.static("public", { maxAge: "1h" }));
+app.use(
+  "/public",
+  express.static(path.join(__dirname, "public"), { maxAge: "1h" })
+);
 
 // handle SSR requests
 app.all(
@@ -39,5 +56,5 @@ app.all(
   })
 );
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log("http://localhost:" + port));
