@@ -6,10 +6,7 @@ export default async function makeGetRequest(
 ) {
   const { origin } = new URL(args.request.url);
   const urlString = new URL(origin + url).toString();
-  const urlToUse = process.env.ENFORCE_HTTPS
-    ? urlString.replace("http://", "https://")
-    : urlString;
-  const res = await fetch(urlToUse);
+  const res = await fetch(urlString);
   return res.json();
 }
 
