@@ -1,21 +1,21 @@
-import {
-  unstable_createViteServer,
-  unstable_loadViteServerBuild,
-} from "@remix-run/dev";
+import { createProxyMiddleware } from "http-proxy-middleware";
 import { createRequestHandler } from "@remix-run/express";
 import { installGlobals } from "@remix-run/node";
-import { createProxyMiddleware } from "http-proxy-middleware";
-import path from "path";
 import express from "express";
+import path from "path";
 import { URL } from "url";
 const __dirname = new URL(".", import.meta.url).pathname;
 
 installGlobals();
 
-let vite =
+const viteDevServer =
   process.env.NODE_ENV === "production"
     ? undefined
-    : await unstable_createViteServer();
+    : await import("vite").then((vite) =>
+        vite.createServer({
+          server: { middlewareMode: true },
+        })
+      );
 
 const app = express();
 
@@ -29,13 +29,12 @@ app.use(
 );
 
 // handle asset requests
-
-if (vite) {
-  app.use(vite.middlewares);
+if (viteDevServer) {
+  app.use(viteDevServer.middlewares);
 } else {
   app.use(
-    "/build",
-    express.static(path.join(__dirname, "public/build"), {
+    "/assets",
+    express.static(path.join(__dirname, "build/client/assets"), {
       immutable: true,
       maxAge: "1y",
     })
@@ -45,16 +44,17 @@ app.use(
   "/public",
   express.static(path.join(__dirname, "public"), { maxAge: "1h" })
 );
+app.use(express.static(path.join(__dirname, "build/client"), { maxAge: "1h" }));
 
 // handle SSR requests
 app.all(
   "*",
   createRequestHandler({
-    build: vite
-      ? () => unstable_loadViteServerBuild(vite)
-      : await import("./build/index.js"),
+    build: viteDevServer
+      ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
+      : await import("./build/server/index.js"),
   })
 );
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 app.listen(port, () => console.log("http://localhost:" + port));

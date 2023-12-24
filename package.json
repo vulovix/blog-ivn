@@ -1,7 +1,11 @@
 {
+    "workspaces": [
+        "packages/*",
+        "workspaces/*"
+    ],
     "scripts": {
-        "start": "pnpm --filter web dev",
-        "serve": "pnpm --filter web start",
-        "build": "pnpm --filter web build"
+        "start": "npm run dev -w workspaces/web",
+        "serve": "npm run start -w workspaces/web",
+        "build": "npm run build -w workspaces/web"
     }
 }
