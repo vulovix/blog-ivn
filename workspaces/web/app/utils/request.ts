@@ -10,7 +10,6 @@ export default async function makeGetRequest(
     ? urlString.replace("http://", "https://")
     : urlString;
   const res = await fetch(urlToUse);
-  console.log(origin, new URL(origin + url).toString());
   return res.json();
 }
 
