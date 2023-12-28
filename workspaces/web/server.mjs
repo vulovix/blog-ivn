@@ -22,7 +22,7 @@ const app = express();
 app.use(
   "/api",
   createProxyMiddleware({
-    target: "https://oaza.dev",
+    target: "https://blog.ivn.dev",
     changeOrigin: true,
     // pathRewrite: { "^/api": "" },
   })

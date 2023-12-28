@@ -33,7 +33,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     { property: "twitter:image", content: data.image },
     { property: "og:image:alt", content: data.image },
     { property: "twitter:image:alt", content: data.image },
-    { property: "og:url", content: `https://oaza.dev/articles/${data.slug}` },
+    {
+      property: "og:url",
+      content: `https://blog.ivn.dev/articles/${data.slug}`,
+    },
     { property: "og:type", content: "article" },
     { property: "twitter:card", content: "summary_large_image" },
   ];

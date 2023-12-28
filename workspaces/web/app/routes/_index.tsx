@@ -34,21 +34,21 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     },
     {
       property: "og:image",
-      content: "https://oaza.dev/public/meta-social.jpg",
+      content: "https://oblog.ivn.dev/public/meta-social.jpg",
     },
     {
       property: "twitter:image",
-      content: "https://oaza.dev/public/meta-social.jpg",
+      content: "https://blog.ivn.dev/public/meta-social.jpg",
     },
     {
       property: "og:image:alt",
-      content: "https://oaza.dev/public/meta-social.jpg",
+      content: "https://blog.ivn.dev/public/meta-social.jpg",
     },
     {
       property: "twitter:image:alt",
-      content: "https://oaza.dev/public/meta-social.jpg",
+      content: "https://blog.ivn.dev/public/meta-social.jpg",
     },
-    { property: "og:url", content: `https://oaza.dev` },
+    { property: "og:url", content: `https://blog.ivn.dev` },
     { property: "og:type", content: "article" },
     { property: "twitter:card", content: "summary_large_image" },
   ];
