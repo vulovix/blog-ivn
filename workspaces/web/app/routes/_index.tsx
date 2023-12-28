@@ -34,7 +34,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     },
     {
       property: "og:image",
-      content: "https://oblog.ivn.dev/public/meta-social.jpg",
+      content: "https://blog.ivn.dev/public/meta-social.jpg",
     },
     {
       property: "twitter:image",
