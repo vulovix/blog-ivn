@@ -8,12 +8,11 @@ export function formatDate(ts: number) {
     "May",
     "Jun",
     "Jul",
+    "Aug",
     "Sep",
     "Oct",
     "Nov",
     "Dec",
   ];
-  return `${
-    months[date.getMonth() - 1]
-  } ${date.getDate()}, ${date.getFullYear()}`;
+  return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
